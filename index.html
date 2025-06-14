@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutor AI - Индивидуальные репетиторы</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+      * {
+        font-family: "Inter", sans-serif;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          #ff6b35 0%,
+          #f7931e 50%,
+          #ff8c42 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .floating-shape {
+        position: absolute;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .floating-shape:nth-child(2) {
+        animation-delay: -1s;
+      }
+      .floating-shape:nth-child(3) {
+        animation-delay: -2s;
+      }
+      .floating-shape:nth-child(4) {
+        animation-delay: -3s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-15px) rotate(3deg);
+        }
+      }
+
+      .triangle {
+        width: 0;
+        height: 0;
+        border-style: solid;
+      }
+
+      .triangle-1 {
+        border-left: 60px solid transparent;
+        border-right: 60px solid transparent;
+        border-bottom: 100px solid rgba(255, 255, 255, 0.1);
+        top: 15%;
+        left: 8%;
+      }
+
+      .triangle-2 {
+        border-left: 40px solid transparent;
+        border-right: 40px solid transparent;
+        border-bottom: 70px solid rgba(255, 255, 255, 0.08);
+        top: 60%;
+        right: 10%;
+        transform: rotate(180deg);
+      }
+
+      .circle-shape {
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .circle-1 {
+        width: 120px;
+        height: 120px;
+        top: 25%;
+        right: 15%;
+      }
+
+      .circle-2 {
+        width: 80px;
+        height: 80px;
+        bottom: 20%;
+        left: 12%;
+      }
+
+      .polygon-shape {
+        background: rgba(255, 255, 255, 0.12);
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        width: 100px;
+        height: 100px;
+        bottom: 35%;
+        right: 25%;
+      }
+
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+
+      .fade-in-up.delay-1 {
+        animation-delay: 0.2s;
+      }
+      .fade-in-up.delay-2 {
+        animation-delay: 0.4s;
+      }
+      .fade-in-up.delay-3 {
+        animation-delay: 0.6s;
+      }
+      .fade-in-up.delay-4 {
+        animation-delay: 0.8s;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .glow-button {
+        background: linear-gradient(45deg, #4ade80, #22c55e);
+        box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+        transition: all 0.3s ease;
+      }
+
+      .glow-button:hover {
+        box-shadow: 0 6px 20px rgba(34, 197, 94, 0.6);
+        transform: translateY(-2px);
+      }
+
+      .phone-input {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .phone-input:focus {
+        border-color: #22c55e;
+        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+      }
+
+      .student-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        position: absolute;
+        background: linear-gradient(45deg, #8b5cf6, #a855f7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        animation: float 8s ease-in-out infinite;
+      }
+
+      .student-1 {
+        top: 20%;
+        left: 5%;
+        animation-delay: 0s;
+      }
+
+      .student-2 {
+        top: 15%;
+        right: 8%;
+        animation-delay: -2s;
+      }
+
+      .student-3 {
+        bottom: 25%;
+        left: 8%;
+        animation-delay: -4s;
+      }
+
+      .typing-effect {
+        border-right: 3px solid white;
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        50% {
+          border-color: white;
+        }
+        51%,
+        100% {
+          border-color: transparent;
+        }
+      }
+
+      .success-badge {
+        background: linear-gradient(45deg, #fbbf24, #f59e0b);
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+      * {
+        font-family: "Inter", sans-serif;
+      }
+
+      .section2-gradient-bg {
+        background: linear-gradient(
+          135deg,
+          #f3e8ff 0%,
+          #fce7f3 50%,
+          #f0f9ff 100%
+        );
+      }
+
+      .section2-fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+      }
+
+      .section2-fade-in.section2-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .section2-slide-in-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 0.8s ease-out;
+      }
+
+      .section2-slide-in-left.section2-visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .section2-slide-in-right {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.8s ease-out;
+      }
+
+      .section2-slide-in-right.section2-visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .section2-feature-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .section2-feature-card:hover {
+        background: rgba(255, 255, 255, 0.9);
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .section2-category-pill {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .section2-category-pill:hover {
+        background: linear-gradient(45deg, #8b5cf6, #a855f7);
+        color: white;
+        transform: scale(1.05);
+      }
+
+      .section2-image-placeholder {
+        background: linear-gradient(45deg, #e0e7ff, #f3e8ff);
+        border: 2px dashed #c7d2fe;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6366f1;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .section2-image-placeholder:hover {
+        background: linear-gradient(45deg, #c7d2fe, #e0e7ff);
+        border-color: #8b5cf6;
+      }
+
+      .section2-scroll-container {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .section2-scroll-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .section2-icon-wrapper {
+        background: linear-gradient(45deg, #8b5cf6, #a855f7);
+        width: 60px;
+        height: 60px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+      }
+
+      .section2-stagger-1 {
+        transition-delay: 0.1s;
+      }
+      .section2-stagger-2 {
+        transition-delay: 0.2s;
+      }
+      .section2-stagger-3 {
+        transition-delay: 0.3s;
+      }
+      .section2-stagger-4 {
+        transition-delay: 0.4s;
+      }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+    <!-- Header -->
+    <header
+      class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md border-b border-white/20"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center space-x-3">
+            <!-- Logo placeholder -->
+            <div
+              class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"
+            >
+              <span class="text-white font-bold text-lg">T</span>
+            </div>
+            <!-- Brand name -->
+            <span class="text-white font-bold text-xl">Tutor AI</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section
+      class="min-h-screen gradient-bg relative flex items-center justify-center pt-16"
+    >
+      <!-- Floating Geometric Shapes -->
+      <div class="triangle triangle-1 floating-shape"></div>
+      <div class="triangle triangle-2 floating-shape"></div>
+      <div class="circle-shape circle-1 floating-shape"></div>
+      <div class="circle-shape circle-2 floating-shape"></div>
+      <div class="polygon-shape floating-shape"></div>
+
+      <!-- Student Avatars -->
+      <div class="student-avatar student-1">👩‍🎓</div>
+      <div class="student-avatar student-2">👨‍🎓</div>
+      <div class="student-avatar student-3">👦</div>
+
+      <!-- Success Badge -->
+      <div
+        class="success-badge absolute top-8 right-8 px-4 py-2 rounded-full text-white font-bold text-sm fade-in-up"
+      >
+        ✨ С 1 по 12 классы
+      </div>
+
+      <!-- Main Content -->
+      <div
+        class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+      >
+        <!-- Main Headline -->
+        <h1
+          class="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 fade-in-up leading-tight"
+        >
+          Поможем создать успешное
+          <br />
+          <span class="typing-effect" id="typingText"
+            >будущее для ваших детей</span
+          >
+        </h1>
+
+        <!-- Subheadline -->
+        <!-- <p
+          class="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed fade-in-up delay-1"
+        >
+          Всего один шаг — и мы составим персональный план развития для вашего
+          ребёнка
+        </p> -->
+
+        <!-- Phone Input + CTA -->
+        <div
+          class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 fade-in-up delay-2"
+        >
+          <div class="relative">
+            <input
+              type="tel"
+              placeholder="+7 (___) ___-__-__"
+              class="phone-input w-72 px-6 py-4 rounded-full text-gray-800 text-lg focus:outline-none transition-all duration-300"
+              id="phoneInput"
+            />
+          </div>
+          <button
+            class="glow-button text-white font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 focus:outline-none whitespace-nowrap"
+            onclick="handleCTAClick()"
+          >
+            Подобрать репетитора
+          </button>
+        </div>
+
+        <!-- Trust Message -->
+        <div class="fade-in-up delay-3">
+          <p
+            class="text-white/80 text-sm mb-8 flex items-center justify-center gap-2"
+          >
+            <span>📞</span>
+            Всего один шаг — и мы составим путь развития для вашего ребёнка
+          </p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div
+          class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 fade-in-up delay-4"
+        >
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center">
+            <div class="text-3xl font-bold text-white mb-2" id="counter1">
+              0
+            </div>
+            <div class="text-white/80 text-sm">Довольных семей</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center">
+            <div class="text-3xl font-bold text-white mb-2" id="counter2">
+              0
+            </div>
+            <div class="text-white/80 text-sm">Опытных репетиторов</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center">
+            <div class="text-3xl font-bold text-white mb-2" id="counter3">
+              0
+            </div>
+            <div class="text-white/80 text-sm">Школьных предметов</div>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="flex flex-wrap justify-center gap-4 fade-in-up delay-4">
+          <div
+            class="bg-white/15 backdrop-blur-sm px-6 py-3 rounded-full text-white font-medium"
+          >
+            📈 Повышение успеваемости
+          </div>
+          <div
+            class="bg-white/15 backdrop-blur-sm px-6 py-3 rounded-full text-white font-medium"
+          >
+            🎯 Подготовка к экзаменам
+          </div>
+          <div
+            class="bg-white/15 backdrop-blur-sm px-6 py-3 rounded-full text-white font-medium"
+          >
+            🧠 Развитие потенциала
+          </div>
+        </div>
+      </div>
+
+      <!-- Curved Arrow -->
+      <div
+        class="absolute bottom-32 left-1/2 transform -translate-x-1/2 text-white/40"
+      >
+        <svg width="100" height="60" viewBox="0 0 100 60" fill="none">
+          <path
+            d="M20 20 Q50 40 80 20"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+          />
+          <path
+            d="M75 15 L80 20 L75 25"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+          />
+        </svg>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div
+        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60 animate-bounce"
+      >
+        <div
+          class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
+        >
+          <div
+            class="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section2-gradient-bg py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Title -->
+        <div class="text-center mb-16 section2-fade-in">
+          <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+            Как мы добиваемся результата?
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Современные технологии и персональный подход для достижения целей
+            каждого ученика
+          </p>
+        </div>
+
+        <!-- Category Pills -->
+        <div class="mb-16 section2-fade-in">
+          <div
+            class="flex overflow-x-auto section2-scroll-container gap-4 pb-4"
+          >
+            <div
+              class="section2-category-pill px-6 py-3 rounded-full text-gray-700 font-medium whitespace-nowrap cursor-pointer"
+            >
+              📚 Подготовка к ОГЭ и ЕГЭ
+            </div>
+            <div
+              class="section2-category-pill px-6 py-3 rounded-full text-gray-700 font-medium whitespace-nowrap cursor-pointer"
+            >
+              🎓 Школьные предметы
+            </div>
+            <div
+              class="section2-category-pill px-6 py-3 rounded-full text-gray-700 font-medium whitespace-nowrap cursor-pointer"
+            >
+              🏠 Домашний лицей
+            </div>
+            <div
+              class="section2-category-pill px-6 py-3 rounded-full text-gray-700 font-medium whitespace-nowrap cursor-pointer"
+            >
+              💻 Компьютерные курсы
+            </div>
+            <div
+              class="section2-category-pill px-6 py-3 rounded-full text-gray-700 font-medium whitespace-nowrap cursor-pointer"
+            >
+              👶 Счастливый малыш
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <!-- Features Column -->
+          <div class="space-y-8 section2-slide-in-left">
+            <!-- Feature 1 -->
+            <div
+              class="section2-feature-card p-8 rounded-2xl section2-stagger-1"
+            >
+              <div class="section2-icon-wrapper">
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                Аналитика прогресса в режиме реального времени
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Показываем достижения и пробелы, помогаем сфокусироваться на
+                важном.
+              </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div
+              class="section2-feature-card p-8 rounded-2xl section2-stagger-2"
+            >
+              <div class="section2-icon-wrapper">
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                Мгновенный подбор репетиторов
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                На основе целей ученика и уровня знаний.
+              </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div
+              class="section2-feature-card p-8 rounded-2xl section2-stagger-3"
+            >
+              <div class="section2-icon-wrapper">
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                Мультимодальные инструменты обучения
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Видео, голос, чат, доска и интеграции — для разных типов
+                восприятия информации.
+              </p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div
+              class="section2-feature-card p-8 rounded-2xl section2-stagger-4"
+            >
+              <div class="section2-icon-wrapper">
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                Бадди, кураторы и чат
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Не просто даём знания — вместе разбираем сложное.
+              </p>
+            </div>
+          </div>
+
+          <!-- Images Column -->
+          <div class="space-y-6 section2-slide-in-right">
+            <!-- Main Dashboard Image -->
+            <div class="section2-image-placeholder rounded-2xl text-center">
+              <img
+                src="analytics.jpg"
+                alt="Аналитика прогресса ученика"
+                class="w-full h-full rounded-2xl"
+              />
+              <!-- <div class="flex flex-col items-center justify-center h-full">
+                <svg
+                  class="w-16 h-16 mb-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                  ></path>
+                </svg>
+                <p>Dashboard Analytics</p>
+              </div> -->
+            </div>
+            <div class="section2-image-placeholder rounded-2xl text-center">
+              <img
+                src="how it looks like.jpg"
+                alt="Живой урок с репетитором"
+                class="w-full h-full rounded-2xl"
+              />
+              <!-- <div class="flex flex-col items-center justify-center h-full">
+                  <svg
+                    class="w-16 h-16 mb-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    ></path>
+                  </svg>
+                  <p>Dashboard Analytics</p>
+                </div> -->
+            </div>
+
+            <!-- Two smaller images -->
+            <!-- <div class="grid grid-cols-2 gap-6">
+              <div
+                class="section2-image-placeholder rounded-2xl h-40 text-center"
+              >
+                <img
+                  src="live-lesson.png"
+                  alt="Живой урок с репетитором"
+                  class="w-full h-full object-cover rounded-2xl hidden"
+                />
+                <div class="flex flex-col items-center justify-center h-full">
+                  <svg
+                    class="w-12 h-12 mb-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    ></path>
+                  </svg>
+                  <p class="text-sm">Live Lesson</p>
+                </div>
+              </div>
+
+              <div
+                class="section2-image-placeholder rounded-2xl h-40 text-center"
+              >
+                <img
+                  src="chat-interface.png"
+                  alt="Чат с репетитором и кураторами"
+                  class="w-full h-full object-cover rounded-2xl hidden"
+                />
+                <div class="flex flex-col items-center justify-center h-full">
+                  <svg
+                    class="w-12 h-12 mb-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
+                    ></path>
+                  </svg>
+                  <p class="text-sm">Chat Interface</p>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Phone number formatting
+      document
+        .getElementById("phoneInput")
+        .addEventListener("input", function (e) {
+          let value = e.target.value.replace(/\D/g, "");
+          if (value.startsWith("7")) value = value.substring(1);
+          if (value.length > 10) value = value.substring(0, 10);
+
+          let formatted = "+7";
+          if (value.length > 0) formatted += " (" + value.substring(0, 3);
+          if (value.length > 3) formatted += ") " + value.substring(3, 6);
+          if (value.length > 6) formatted += "-" + value.substring(6, 8);
+          if (value.length > 8) formatted += "-" + value.substring(8, 10);
+
+          e.target.value = formatted;
+        });
+
+      // Typing effect
+      const texts = [
+        "будущее для ваших детей",
+        "уверенность в знаниях",
+        "успех в учёбе",
+        "любовь к обучению",
+      ];
+      let textIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      const typingElement = document.getElementById("typingText");
+
+      function typeText() {
+        const currentText = texts[textIndex];
+
+        if (isDeleting) {
+          typingElement.textContent = currentText.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          typingElement.textContent = currentText.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        let typeSpeed = isDeleting ? 80 : 120;
+
+        if (!isDeleting && charIndex === currentText.length) {
+          typeSpeed = 3000;
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          textIndex = (textIndex + 1) % texts.length;
+          typeSpeed = 500;
+        }
+
+        setTimeout(typeText, typeSpeed);
+      }
+
+      // Counter animation
+      function animateCounter(element, target, duration = 2000) {
+        let start = 0;
+        const increment = target / (duration / 16);
+
+        function updateCounter() {
+          start += increment;
+          if (start < target) {
+            element.textContent = Math.floor(start);
+            requestAnimationFrame(updateCounter);
+          } else {
+            element.textContent = target;
+          }
+        }
+        updateCounter();
+      }
+
+      // CTA Click handler
+      function handleCTAClick() {
+        const phone = document.getElementById("phoneInput").value;
+        if (phone.length < 18) {
+          document.getElementById("phoneInput").focus();
+          document.getElementById("phoneInput").style.borderColor = "#ef4444";
+          setTimeout(() => {
+            document.getElementById("phoneInput").style.borderColor = "#22c55e";
+          }, 2000);
+          return;
+        }
+
+        // Add success animation
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = "✓ Заявка отправлена!";
+        button.style.background = "linear-gradient(45deg, #22c55e, #16a34a)";
+
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.style.background = "linear-gradient(45deg, #4ade80, #22c55e)";
+        }, 3000);
+
+        console.log("CTA clicked with phone:", phone);
+      }
+
+      // Initialize animations
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(typeText, 1000);
+
+        setTimeout(() => {
+          animateCounter(document.getElementById("counter1"), 3500);
+          animateCounter(document.getElementById("counter2"), 280);
+          animateCounter(document.getElementById("counter3"), 15);
+        }, 1500);
+      });
+
+      // Parallax effect
+      window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const shapes = document.querySelectorAll(".floating-shape");
+        shapes.forEach((shape, index) => {
+          const speed = (index + 1) * 0.3;
+          shape.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+      });
+
+      // Section 2 - Intersection Observer for scroll animations
+      const section2ObserverOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const section2Observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("section2-visible");
+          }
+        });
+      }, section2ObserverOptions);
+
+      // Section 2 - Observe all animated elements
+      document.addEventListener("DOMContentLoaded", () => {
+        const section2AnimatedElements = document.querySelectorAll(
+          ".section2-fade-in, .section2-slide-in-left, .section2-slide-in-right"
+        );
+        section2AnimatedElements.forEach((el) => section2Observer.observe(el));
+      });
+
+      // Section 2 - Category pill interactions
+      document.querySelectorAll(".section2-category-pill").forEach((pill) => {
+        pill.addEventListener("click", function () {
+          // Remove active class from all section2 pills
+          document.querySelectorAll(".section2-category-pill").forEach((p) => {
+            p.classList.remove("bg-purple-600", "text-white");
+            p.style.background = "rgba(255, 255, 255, 0.9)";
+            p.style.color = "#374151";
+          });
+
+          // Add active class to clicked pill
+          this.style.background = "linear-gradient(45deg, #8b5cf6, #a855f7)";
+          this.style.color = "white";
+
+          // Here you could filter content based on selected category
+          console.log(
+            "Section 2 - Selected category:",
+            this.textContent.trim()
+          );
+        });
+      });
+
+      // Section 2 - Feature card hover effects
+      document.querySelectorAll(".section2-feature-card").forEach((card) => {
+        card.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-8px)";
+        });
+
+        card.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0)";
+        });
+      });
+
+      // Section 2 - Smooth horizontal scroll for category pills
+      const section2ScrollContainer = document.querySelector(
+        ".section2-scroll-container"
+      );
+      let section2IsDown = false;
+      let section2StartX;
+      let section2ScrollLeft;
+
+      section2ScrollContainer.addEventListener("mousedown", (e) => {
+        section2IsDown = true;
+        section2StartX = e.pageX - section2ScrollContainer.offsetLeft;
+        section2ScrollLeft = section2ScrollContainer.scrollLeft;
+      });
+
+      section2ScrollContainer.addEventListener("mouseleave", () => {
+        section2IsDown = false;
+      });
+
+      section2ScrollContainer.addEventListener("mouseup", () => {
+        section2IsDown = false;
+      });
+
+      section2ScrollContainer.addEventListener("mousemove", (e) => {
+        if (!section2IsDown) return;
+        e.preventDefault();
+        const section2X = e.pageX - section2ScrollContainer.offsetLeft;
+        const section2Walk = (section2X - section2StartX) * 2;
+        section2ScrollContainer.scrollLeft = section2ScrollLeft - section2Walk;
+      });
+    </script>
+  </body>
+</html>
