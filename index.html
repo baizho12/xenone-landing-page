@@ -12,6 +12,254 @@
         font-family: "Inter", sans-serif;
       }
 
+      .section3-consultation-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .section3-consultation-bg::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+          repeat;
+      }
+
+      .section3-form-container {
+        background: white;
+        border-radius: 24px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+        position: relative;
+        z-index: 10;
+      }
+
+      .section3-helper-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 5;
+      }
+
+      .section3-helper-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .section3-form-field {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+
+      .section3-form-input {
+        width: 100%;
+        padding: 16px 20px;
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background: #fafafa;
+      }
+
+      .section3-form-input:focus {
+        outline: none;
+        border-color: #667eea;
+        background: white;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+      }
+
+      .section3-form-label {
+        position: absolute;
+        left: 20px;
+        top: 16px;
+        color: #6b7280;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        background: transparent;
+        padding: 0 4px;
+      }
+
+      .section3-form-input:focus + .section3-form-label,
+      .section3-form-input:not(:placeholder-shown) + .section3-form-label {
+        top: -12px;
+        font-size: 12px;
+        color: #667eea;
+        background: white;
+        font-weight: 500;
+      }
+
+      .section3-submit-btn {
+        background: linear-gradient(45deg, #10b981, #059669);
+        border: none;
+        padding: 18px 40px;
+        border-radius: 12px;
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+      }
+
+      .section3-submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 25px rgba(16, 185, 129, 0.4);
+      }
+
+      .section3-submit-btn:active {
+        transform: translateY(0);
+      }
+
+      .section3-checkbox-custom {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #d1d5db;
+        border-radius: 4px;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .section3-checkbox-custom:checked {
+        background: #667eea;
+        border-color: #667eea;
+      }
+
+      .section3-checkbox-custom:checked::after {
+        content: "✓";
+        position: absolute;
+        top: -2px;
+        left: 3px;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .section3-floating-element {
+        position: absolute;
+        opacity: 0.8;
+        animation: section3-float 6s ease-in-out infinite;
+      }
+
+      .section3-floating-element:nth-child(odd) {
+        animation-delay: -3s;
+      }
+
+      @keyframes section3-float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+      }
+
+      .section3-image-placeholder {
+        background: linear-gradient(45deg, #fef3c7, #fde68a);
+        border: 2px dashed #f59e0b;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #d97706;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .section3-image-placeholder:hover {
+        background: linear-gradient(45deg, #fde68a, #fbbf24);
+        border-color: #d97706;
+      }
+
+      .section3-fade-in-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease-out;
+      }
+
+      .section3-fade-in-up.section3-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .section3-fade-in-left {
+        opacity: 0;
+        transform: translateX(-40px);
+        transition: all 0.8s ease-out;
+      }
+
+      .section3-fade-in-left.section3-visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .section3-fade-in-right {
+        opacity: 0;
+        transform: translateX(40px);
+        transition: all 0.8s ease-out;
+      }
+
+      .section3-fade-in-right.section3-visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .section3-footer-bg {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      }
+
+      .section3-social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: #d1d5db;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+
+      .section3-social-icon:hover {
+        background: #667eea;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .section3-footer-link {
+        color: #d1d5db;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        padding: 4px 0;
+        display: block;
+      }
+
+      .section3-footer-link:hover {
+        color: #667eea;
+        transform: translateX(4px);
+      }
+
+      .section3-stagger-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .section3-stagger-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .section3-stagger-delay-3 {
+        transition-delay: 0.3s;
+      }
+
       .gradient-bg {
         background: linear-gradient(
           135deg,
@@ -779,7 +1027,468 @@
       </div>
     </section>
 
+    <section class="section3-consultation-bg py-20">
+      <!-- Floating decorative elements -->
+      <div class="section3-floating-element top-10 left-10 text-white text-6xl">
+        <i class="fas fa-thumbs-up"></i>
+      </div>
+      <div
+        class="section3-floating-element top-20 right-16 text-white text-5xl"
+      >
+        <i class="fas fa-arrow-right"></i>
+      </div>
+      <div
+        class="section3-floating-element bottom-16 left-20 text-white text-4xl"
+      >
+        <i class="fas fa-heart"></i>
+      </div>
+      <div
+        class="section3-floating-element bottom-20 right-10 text-white text-5xl"
+      >
+        <i class="fas fa-star"></i>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Section Title -->
+        <div class="text-center mb-16 section3-fade-in-up">
+          <h2 class="text-4xl sm:text-5xl font-bold text-white mb-6">
+            Подберём программу обучения на бесплатной консультации
+          </h2>
+          <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+            Расскажем о методиках, покажем платформу и подберём идеального
+            репетитора
+          </p>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid lg:grid-cols-3 gap-8 items-start">
+          <!-- Left Helper Card -->
+          <div
+            class="section3-helper-card p-8 section3-fade-in-left section3-stagger-delay-1"
+          >
+            <!-- <div class="section3-image-placeholder h-32 mb-6">
+              <div class="text-center">
+                <i class="fas fa-user-graduate text-4xl mb-2"></i>
+                <p class="text-sm">Довольные ученики</p>
+              </div>
+            </div> -->
+            <div class="section3-image-placeholder h-50 mb-6">
+              <!-- <div class="text-center">
+                  <i class="fas fa-clock text-4xl mb-2"></i>
+                  <p class="text-sm">Быстрый результат</p>
+                </div> -->
+              <img
+                src="child2.jpeg"
+                alt="человек один"
+                class="w-full h-full rounded-2xl"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              Индивидуальный подход
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Учитываем особенности каждого ребёнка и подбираем оптимальную
+              программу обучения
+            </p>
+          </div>
+
+          <!-- Center Form -->
+          <div
+            class="section3-form-container p-10 section3-fade-in-up section3-stagger-delay-2"
+          >
+            <form id="section3-consultation-form" class="space-y-6">
+              <!-- Phone Field -->
+              <div class="section3-form-field">
+                <input
+                  type="tel"
+                  id="section3-phone"
+                  class="section3-form-input"
+                  placeholder=" "
+                  value="+7 ("
+                  required
+                />
+                <label for="section3-phone" class="section3-form-label"
+                  >Телефон</label
+                >
+              </div>
+
+              <!-- Parent Name Field -->
+              <div class="section3-form-field">
+                <input
+                  type="text"
+                  id="section3-parent-name"
+                  class="section3-form-input"
+                  placeholder=" "
+                  required
+                />
+                <label for="section3-parent-name" class="section3-form-label"
+                  >Имя родителя</label
+                >
+              </div>
+
+              <!-- Email Field -->
+              <div class="section3-form-field">
+                <input
+                  type="email"
+                  id="section3-email"
+                  class="section3-form-input"
+                  placeholder=" "
+                  required
+                />
+                <label for="section3-email" class="section3-form-label"
+                  >Email</label
+                >
+              </div>
+
+              <!-- Subject Dropdown -->
+              <div class="section3-form-field">
+                <select
+                  id="section3-subject"
+                  class="section3-form-input"
+                  required
+                >
+                  <option value="">Выберите предмет</option>
+                  <option value="english-kids">
+                    Английский язык для детей
+                  </option>
+                  <option value="math">Математика</option>
+                  <option value="russian">Русский язык</option>
+                  <option value="physics">Физика</option>
+                  <option value="chemistry">Химия</option>
+                  <option value="biology">Биология</option>
+                  <option value="history">История</option>
+                  <option value="geography">География</option>
+                  <option value="computer-science">Информатика</option>
+                  <option value="oge-prep">Подготовка к ОГЭ</option>
+                  <option value="ege-prep">Подготовка к ЕГЭ</option>
+                </select>
+              </div>
+
+              <!-- Consent Checkbox -->
+              <div class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  id="section3-consent"
+                  class="section3-checkbox-custom mt-1"
+                  required
+                />
+                <label
+                  for="section3-consent"
+                  class="text-sm text-gray-600 leading-relaxed"
+                >
+                  Согласен с
+                  <a href="#" class="text-blue-600 hover:underline"
+                    >политикой конфиденциальности</a
+                  >
+                  и
+                  <a href="#" class="text-blue-600 hover:underline"
+                    >пользовательским соглашением</a
+                  >
+                </label>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="section3-submit-btn w-full">
+                <i class="fas fa-paper-plane mr-2"></i>
+                Отправить заявку
+              </button>
+            </form>
+          </div>
+
+          <!-- Right Helper Card -->
+          <div
+            class="section3-helper-card p-8 section3-fade-in-right section3-stagger-delay-3"
+          >
+            <!-- <div class="section3-image-placeholder h-32 mb-6">
+              <div class="text-center">
+                <i class="fas fa-user-graduate text-4xl mb-2"></i>
+                <p class="text-sm">Довольные ученики</p>
+              </div>
+            </div> -->
+            <div class="section3-image-placeholder h-50 mb-6">
+              <!-- <div class="text-center">
+                    <i class="fas fa-clock text-4xl mb-2"></i>
+                    <p class="text-sm">Быстрый результат</p>
+                  </div> -->
+              <img
+                src="child1.jpeg"
+                alt="человек один"
+                class="w-full h-full rounded-2xl"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              Бесплатная консультация
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Первый урок бесплатно! Познакомимся, определим цели и составим
+              план обучения
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section3-footer-bg py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Company Info -->
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-2xl font-bold text-white mb-4">Tutor AI</h3>
+              <p class="text-gray-300 mb-4">
+                Современное онлайн-образование для детей и взрослых
+              </p>
+              <div class="text-gray-300">
+                <p class="flex items-center mb-2">
+                  <i class="fas fa-phone mr-3 text-blue-400"></i>
+                  +7 (999) 123-45-67
+                </p>
+                <p class="flex items-center">
+                  <i class="fas fa-envelope mr-3 text-blue-400"></i>
+                  info@tutor-ai.ru
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- General Links -->
+          <div>
+            <h4 class="text-lg font-semibold text-white mb-6">О школе</h4>
+            <nav class="space-y-2">
+              <a href="#" class="section3-footer-link">О нас</a>
+              <a href="#" class="section3-footer-link">Методика</a>
+              <a href="#" class="section3-footer-link">Цены</a>
+              <a href="#" class="section3-footer-link">Отзывы</a>
+              <a href="#" class="section3-footer-link">Контакты</a>
+              <a href="#" class="section3-footer-link">Блог</a>
+            </nav>
+          </div>
+
+          <!-- For Parents -->
+          <div>
+            <h4 class="text-lg font-semibold text-white mb-6">Родителям</h4>
+            <nav class="space-y-2">
+              <a href="#" class="section3-footer-link">Как проходят уроки</a>
+              <a href="#" class="section3-footer-link">Подготовка к ОГЭ</a>
+              <a href="#" class="section3-footer-link">Подготовка к ЕГЭ</a>
+              <a href="#" class="section3-footer-link">Домашний лицей</a>
+              <a href="#" class="section3-footer-link">Программы обучения</a>
+              <a href="#" class="section3-footer-link">FAQ</a>
+            </nav>
+            <div class="mt-6">
+              <p class="text-sm text-gray-400 mb-3">Следите за нами:</p>
+              <div class="flex space-x-3">
+                <a href="#" class="section3-social-icon">
+                  <i class="fab fa-vk"></i>
+                </a>
+                <a href="#" class="section3-social-icon">
+                  <i class="fab fa-telegram"></i>
+                </a>
+                <a href="#" class="section3-social-icon">
+                  <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="#" class="section3-social-icon">
+                  <i class="fab fa-youtube"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- For Students -->
+          <div>
+            <h4 class="text-lg font-semibold text-white mb-6">Ученикам</h4>
+            <nav class="space-y-2">
+              <a href="#" class="section3-footer-link">Личный кабинет</a>
+              <a href="#" class="section3-footer-link">Расписание</a>
+              <a href="#" class="section3-footer-link">Домашние задания</a>
+              <a href="#" class="section3-footer-link">Игры и тесты</a>
+              <a href="#" class="section3-footer-link">Достижения</a>
+              <a href="#" class="section3-footer-link">Помощь</a>
+            </nav>
+            <div class="mt-6">
+              <p class="text-sm text-gray-400 mb-3">Наши соцсети:</p>
+              <div class="flex space-x-3">
+                <a href="#" class="section3-social-icon">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="section3-social-icon">
+                  <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="#" class="section3-social-icon">
+                  <i class="fab fa-discord"></i>
+                </a>
+                <a href="#" class="section3-social-icon">
+                  <i class="fab fa-twitch"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-700 mt-12 pt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="text-gray-400 text-sm mb-4 md:mb-0">
+              © 2024 Tutor AI. Все права защищены.
+            </div>
+            <div class="flex space-x-6 text-sm">
+              <a href="#" class="section3-footer-link"
+                >Политика конфиденциальности</a
+              >
+              <a href="#" class="section3-footer-link"
+                >Пользовательское соглашение</a
+              >
+              <a href="#" class="section3-footer-link">Публичная оферта</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <script>
+      // Section 3 - Intersection Observer for animations
+      const section3ObserverOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const section3Observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("section3-visible");
+          }
+        });
+      }, section3ObserverOptions);
+
+      // Section 3 - Initialize animations
+      document.addEventListener("DOMContentLoaded", () => {
+        const section3AnimatedElements = document.querySelectorAll(
+          ".section3-fade-in-up, .section3-fade-in-left, .section3-fade-in-right"
+        );
+        section3AnimatedElements.forEach((el) => section3Observer.observe(el));
+      });
+
+      // Section 3 - Phone input formatting
+      const section3PhoneInput = document.getElementById("section3-phone");
+      section3PhoneInput.addEventListener("input", function (e) {
+        let value = e.target.value.replace(/\D/g, "");
+
+        if (value.length > 0 && value[0] !== "7") {
+          value = "7" + value;
+        }
+
+        let formattedValue = "+7 (";
+        if (value.length > 1) {
+          formattedValue += value.substring(1, 4);
+        }
+        if (value.length >= 4) {
+          formattedValue += ") " + value.substring(4, 7);
+        }
+        if (value.length >= 7) {
+          formattedValue += "-" + value.substring(7, 9);
+        }
+        if (value.length >= 9) {
+          formattedValue += "-" + value.substring(9, 11);
+        }
+
+        e.target.value = formattedValue;
+      });
+
+      // Section 3 - Form submission
+      const section3ConsultationForm = document.getElementById(
+        "section3-consultation-form"
+      );
+      section3ConsultationForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Get form data
+        const section3FormData = {
+          phone: document.getElementById("section3-phone").value,
+          parentName: document.getElementById("section3-parent-name").value,
+          email: document.getElementById("section3-email").value,
+          subject: document.getElementById("section3-subject").value,
+          consent: document.getElementById("section3-consent").checked,
+        };
+
+        // Validate form
+        if (!section3FormData.consent) {
+          alert("Необходимо согласиться с политикой конфиденциальности");
+          return;
+        }
+
+        // Show loading state
+        const section3SubmitBtn = this.querySelector(".section3-submit-btn");
+        const section3OriginalText = section3SubmitBtn.innerHTML;
+        section3SubmitBtn.innerHTML =
+          '<i class="fas fa-spinner fa-spin mr-2"></i>Отправляем...';
+        section3SubmitBtn.disabled = true;
+
+        // Simulate form submission
+        setTimeout(() => {
+          // Reset button
+          section3SubmitBtn.innerHTML =
+            '<i class="fas fa-check mr-2"></i>Заявка отправлена!';
+          section3SubmitBtn.style.background =
+            "linear-gradient(45deg, #10b981, #059669)";
+
+          // Show success message
+          alert("Спасибо! Мы свяжемся с вами в ближайшее время.");
+
+          // Reset form after delay
+          setTimeout(() => {
+            this.reset();
+            section3PhoneInput.value = "+7 (";
+            section3SubmitBtn.innerHTML = section3OriginalText;
+            section3SubmitBtn.disabled = false;
+            section3SubmitBtn.style.background =
+              "linear-gradient(45deg, #10b981, #059669)";
+          }, 2000);
+
+          console.log("Section 3 - Form submitted:", section3FormData);
+        }, 1500);
+      });
+
+      // Section 3 - Enhanced input interactions
+      document.querySelectorAll(".section3-form-input").forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.parentElement.classList.add("focused");
+        });
+
+        input.addEventListener("blur", function () {
+          this.parentElement.classList.remove("focused");
+        });
+      });
+
+      // Section 3 - Social media hover effects
+      document.querySelectorAll(".section3-social-icon").forEach((icon) => {
+        icon.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-3px) scale(1.1)";
+        });
+
+        icon.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(-2px) scale(1)";
+        });
+      });
+
+      // Section 3 - Smooth scroll for footer links
+      document
+        .querySelectorAll('.section3-footer-link[href^="#"]')
+        .forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const section3Target = document.querySelector(
+              this.getAttribute("href")
+            );
+            if (section3Target) {
+              section3Target.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          });
+        });
+
       // Phone number formatting
       document
         .getElementById("phoneInput")
