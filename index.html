@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tutor AI - Индивидуальные репетиторы</title>
+    <title>Tutor AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
@@ -1550,7 +1550,9 @@
 
         setTimeout(typeText, typeSpeed);
       }
-
+      function formatNumber(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      }
       // Counter animation
       function animateCounter(element, target, duration = 2000) {
         let start = 0;
@@ -1559,10 +1561,10 @@
         function updateCounter() {
           start += increment;
           if (start < target) {
-            element.textContent = Math.floor(start);
+            element.textContent = formatNumber(Math.floor(start));
             requestAnimationFrame(updateCounter);
           } else {
-            element.textContent = target;
+            element.textContent = formatNumber(target);
           }
         }
         updateCounter();
