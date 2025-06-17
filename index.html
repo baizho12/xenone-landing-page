@@ -501,6 +501,17 @@
         transition: all 0.8s ease-out;
       }
 
+      .custom-scrollbar::-webkit-scrollbar {
+        height: 8px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #94a3b8; /* slate-400 */
+        border-radius: 9999px;
+      }
+
       .section3-fade-in-up.section3-visible {
         opacity: 1;
         transform: translateY(0);
@@ -1420,7 +1431,7 @@
       <body>
         <!-- Students section  -->
         <section class="py-8 px-4 md:py-12 animate-on-scroll">
-          <div class="max-w-6xl mx-auto">
+          <div class="max-w-7xl mx-auto">
             <!-- Header -->
             <div class="text-center mb-16 animate-fade-in">
               <h2
@@ -1444,7 +1455,7 @@
               class="testimonial-scroll-container overflow-x-auto pb-6 animate-slide-left"
             >
               <div
-                class="flex space-x-8 md:space-x-12 px-4 md:px-8 py-10 justify-between"
+                class="flex space-x-8 md:space-x-12 px-4 md:px-8 py-10 justify-between overflow-x-auto custom-scrollbar"
               >
                 <!-- Testimonial 1 -->
                 <div
@@ -1482,7 +1493,7 @@
                     </div>
                   </div>
 
-                  <div class="testimonial-quote-bubble max-w-xs">
+                  <div class="testimonial-quote-bubble">
                     <p class="text-sm font-medium">
                       "Я не только поняла, но и полюбила химию!"
                     </p>
