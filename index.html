@@ -6,6 +6,267 @@
     <title>Tutor AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+      @keyframes teachers-float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      @keyframes teachers-fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .teachers-gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .teachers-video-container {
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.1) 0%,
+          rgba(118, 75, 162, 0.1) 100%
+        );
+        border-radius: 20px;
+        padding: 8px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(102, 126, 234, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .teachers-video-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      }
+
+      .teachers-video-inner {
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        background: #000;
+      }
+
+      .teachers-play-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+      }
+
+      .teachers-play-overlay:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+        background: rgba(102, 126, 234, 0.9);
+      }
+
+      .teachers-play-overlay:hover .teachers-play-icon {
+        color: white;
+      }
+
+      .teachers-play-icon {
+        color: #667eea;
+        transition: color 0.3s ease;
+      }
+
+      .teachers-video-container.teachers-playing .teachers-play-overlay {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .teachers-feature-card {
+        animation: teachers-fade-in 0.6s ease forwards;
+        opacity: 0;
+      }
+
+      .teachers-feature-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .teachers-feature-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .teachers-feature-card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      .teachers-feature-icon {
+        animation: teachers-float 3s ease-in-out infinite;
+      }
+
+      .teachers-feature-card:nth-child(2) .teachers-feature-icon {
+        animation-delay: -1s;
+      }
+      .teachers-feature-card:nth-child(3) .teachers-feature-icon {
+        animation-delay: -2s;
+      }
+
+      @keyframes testimonial-pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(147, 51, 234, 0.4);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(147, 51, 234, 0.6);
+        }
+      }
+
+      @keyframes testimonial-float {
+        0%,
+        100% {
+          transform: translateY(0px) scale(1);
+        }
+        50% {
+          transform: translateY(-5px) scale(1.02);
+        }
+      }
+
+      .testimonial-video-container {
+        position: relative;
+        border-radius: 50%;
+        overflow: hidden;
+        background: linear-gradient(45deg, #8b5cf6, #ec4899, #f59e0b, #10b981);
+        background-size: 400% 400%;
+        animation: testimonial-gradient 3s ease infinite;
+        padding: 4px;
+      }
+
+      @keyframes testimonial-gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .testimonial-video-inner {
+        border-radius: 50%;
+        overflow: hidden;
+        background: #000;
+        position: relative;
+      }
+
+      .testimonial-video-container:hover {
+        animation: testimonial-pulse-glow 1.5s infinite,
+          testimonial-gradient 3s ease infinite;
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+      }
+
+      .testimonial-play-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 10;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .testimonial-video-container:hover .testimonial-play-overlay {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+
+      .testimonial-video-container.testimonial-playing
+        .testimonial-play-overlay {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+      }
+
+      .testimonial-quote-bubble {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        position: relative;
+        color: white;
+        padding: 12px 16px;
+        margin-top: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .testimonial-quote-bubble::before {
+        content: "";
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #667eea;
+      }
+
+      .testimonial-card {
+        animation: testimonial-float 6s ease-in-out infinite;
+      }
+
+      .testimonial-card:nth-child(2) {
+        animation-delay: -1s;
+      }
+      .testimonial-card:nth-child(3) {
+        animation-delay: -2s;
+      }
+      .testimonial-card:nth-child(4) {
+        animation-delay: -3s;
+      }
+
+      .testimonial-scroll-container {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .testimonial-scroll-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .testimonial-gradient-text {
+        background: linear-gradient(45deg, #8b5cf6, #ec4899);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .testimonial-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .testimonial-glow-button {
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+        transition: all 0.3s ease;
+      }
+      .testimonial-glow-button:hover {
+        box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+        transform: translateY(-2px);
+      }
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
       * {
@@ -1040,6 +1301,372 @@
       </div>
     </section>
 
+    <!-- Students section  -->
+    <section class="py-16 px-4 md:py-24">
+      <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-16">
+          <h2
+            class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight"
+          >
+            Истории успеха наших учеников
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Tutor AI помогает раскрыть потенциал и добиваться высоких
+            результатов — вот, что говорят наши ученики
+          </p>
+          <div
+            class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mt-8 rounded-full"
+          ></div>
+        </div>
+
+        <!-- Testimonials Carousel -->
+        <div class="testimonial-scroll-container overflow-x-auto pb-6">
+          <div
+            class="flex space-x-8 md:space-x-12 px-4 md:px-8 py-10"
+            style="min-width: max-content"
+          >
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card flex-none text-center">
+              <div
+                class="testimonial-video-container w-32 h-32 md:w-40 md:h-40 mx-auto mb-4 cursor-pointer"
+                onclick="toggleTestimonialVideo(this)"
+              >
+                <div class="testimonial-video-inner w-full h-full">
+                  <video
+                    class="testimonial-video"
+                    muted
+                    loop
+                    preload="metadata"
+                    poster=""
+                  >
+                    <source src="customer1.mp4" type="video/mp4" />
+                  </video>
+
+                  <!-- Play Button Overlay -->
+                  <div class="testimonial-play-overlay">
+                    <div
+                      class="bg-white bg-opacity-90 rounded-full p-3 shadow-lg"
+                    >
+                      <svg
+                        class="w-6 h-6 text-purple-600"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-quote-bubble max-w-xs">
+                <p class="text-sm font-medium">"Наконец-то понял физику!"</p>
+              </div>
+              <p class="text-sm text-gray-600 mt-2 font-medium">
+                Айдана, 9 класс
+              </p>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card flex-none text-center">
+              <div
+                class="testimonial-video-container w-32 h-32 md:w-40 md:h-40 mx-auto mb-4 cursor-pointer"
+                onclick="toggleTestimonialVideo(this)"
+              >
+                <div class="testimonial-video-inner w-full h-full">
+                  <video
+                    class="testimonial-video"
+                    muted
+                    loop
+                    preload="metadata"
+                    poster=""
+                  >
+                    <source src="customer2.mp4" type="video/mp4" />
+                  </video>
+
+                  <div class="testimonial-play-overlay">
+                    <div
+                      class="bg-white bg-opacity-90 rounded-full p-3 shadow-lg"
+                    >
+                      <svg
+                        class="w-6 h-6 text-purple-600"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-quote-bubble max-w-xs">
+                <p class="text-sm font-medium">"95 баллов на ЕГЭ! 🔥"</p>
+              </div>
+              <p class="text-sm text-gray-600 mt-2 font-medium">
+                Артем, 11 класс
+              </p>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card flex-none text-center">
+              <div
+                class="testimonial-video-container w-32 h-32 md:w-40 md:h-40 mx-auto mb-4 cursor-pointer"
+                onclick="toggleTestimonialVideo(this)"
+              >
+                <div class="testimonial-video-inner w-full h-full">
+                  <video
+                    class="testimonial-video"
+                    muted
+                    loop
+                    preload="metadata"
+                    poster=""
+                  >
+                    <source src="customer3.mp4" type="video/mp4" />
+                  </video>
+
+                  <div class="testimonial-play-overlay">
+                    <div
+                      class="bg-white bg-opacity-90 rounded-full p-3 shadow-lg"
+                    >
+                      <svg
+                        class="w-6 h-6 text-purple-600"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-quote-bubble max-w-xs">
+                <p class="text-sm font-medium">"Математика стала легкой ✨"</p>
+              </div>
+              <p class="text-sm text-gray-600 mt-2 font-medium">
+                София, 8 класс
+              </p>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div class="testimonial-card flex-none text-center">
+              <div
+                class="testimonial-video-container w-32 h-32 md:w-40 md:h-40 mx-auto mb-4 cursor-pointer"
+                onclick="toggleTestimonialVideo(this)"
+              >
+                <div class="testimonial-video-inner w-full h-full">
+                  <video
+                    class="testimonial-video"
+                    muted
+                    loop
+                    preload="metadata"
+                    poster=""
+                  >
+                    <source src="customer4.mp4" type="video/mp4" />
+                  </video>
+
+                  <div class="testimonial-play-overlay">
+                    <div
+                      class="bg-white bg-opacity-90 rounded-full p-3 shadow-lg"
+                    >
+                      <svg
+                        class="w-6 h-6 text-purple-600"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-quote-bubble max-w-xs">
+                <p class="text-sm font-medium">"Поступил в МГУ! 🎓"</p>
+              </div>
+              <p class="text-sm text-gray-600 mt-2 font-medium">
+                Данияр, выпускник
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Call to Action -->
+        <div
+          class="text-center bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl p-12 border border-indigo-100"
+        >
+          <h3 class="text-3xl font-bold text-gray-900 mb-4">
+            Готовы начать обучение?
+          </h3>
+          <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            Присоединяйтесь к тысячам учеников, которые уже достигли успеха с
+            Tutor AI
+          </p>
+          <button
+            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+            class="testimonial-glow-button bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-300"
+          >
+            Подберите репетитора
+          </button>
+
+          <!-- Trust indicators -->
+          <div
+            class="mt-8 flex items-center justify-center space-x-8 text-sm text-gray-500"
+          >
+            <div class="flex items-center">
+              <svg
+                class="w-5 h-5 text-yellow-400 mr-1"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                />
+              </svg>
+              <span>Отличная помощь</span>
+            </div>
+            <div class="flex items-center">
+              <svg
+                class="w-5 h-5 text-green-500 mr-1"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span>Более 1 000 учеников</span>
+            </div>
+            <div class="flex items-center">
+              <svg
+                class="w-5 h-5 text-blue-500 mr-1"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span>Проверенные репетиторы</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teacher section  -->
+
+    <section class="px-4">
+      <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12 md:mb-16">
+          <h2
+            class="text-4xl md:text-5xl lg:text-6xl font-bold teachers-gradient-text mb-6"
+          >
+            Наши преподаватели
+          </h2>
+          <p
+            class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+          >
+            Опытные и вдохновляющие наставники, которые заботятся о каждом
+            ученике
+          </p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="mb-8">
+          <div class="teachers-video-container max-w-4xl mx-auto">
+            <div class="teachers-video-inner">
+              <video
+                id="teachersVideo"
+                class="w-full h-auto max-h-[500px]"
+                preload="metadata"
+                poster=""
+                controls
+              >
+                <source src="teachers.mp4" type="video/mp4" />
+                Ваш браузер не поддерживает воспроизведение видео.
+              </video>
+
+              <!-- Custom Play Button Overlay -->
+              <div class="teachers-play-overlay" onclick="playTeachersVideo()">
+                <svg
+                  class="teachers-play-icon w-8 h-8"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="grid md:grid-cols-3 gap-8 md:gap-12 max-w-4xl mx-auto mb-8">
+          <!-- Feature 1 -->
+          <div class="teachers-feature-card text-center">
+            <div class="teachers-feature-icon text-4xl mb-4">📘</div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">
+              Качественное обучение
+            </h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Преподавание с упором на результат и глубокое понимание предмета
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="teachers-feature-card text-center">
+            <div class="teachers-feature-icon text-4xl mb-4">🎓</div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">
+              Богатый опыт
+            </h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Наши преподаватели — профессионалы с успешным опытом обучения
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="teachers-feature-card text-center">
+            <div class="teachers-feature-icon text-4xl mb-4">💬</div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">
+              Поддержка и мотивация
+            </h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Постоянная поддержка и вдохновение на пути к успеху
+            </p>
+          </div>
+        </div>
+
+        <!-- Additional Trust Elements -->
+        <!-- <div class="text-center mt-16">
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg max-w-2xl mx-auto border border-blue-100"
+          >
+            <div
+              class="flex items-center justify-center space-x-6 text-sm text-gray-600"
+            >
+              <span class="flex items-center">
+                <span class="text-yellow-500 mr-2">⭐⭐⭐⭐⭐</span>
+                4.9/5 рейтинг
+              </span>
+              <span class="hidden sm:block h-4 w-px bg-gray-300"></span>
+              <span>200+ преподавателей</span>
+              <span class="hidden sm:block h-4 w-px bg-gray-300"></span>
+              <span>🏆 Лучшие в Казахстане</span>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </section>
+
+    <!-- Consultation section -->
+
     <section class="section3-consultation-bg py-20">
       <!-- Floating decorative elements -->
       <div class="section3-floating-element top-10 left-10 text-white text-6xl">
@@ -1181,12 +1808,12 @@
                 <input
                   type="checkbox"
                   id="section3-consent"
-                  class="section3-checkbox-custom mt-1"
+                  class="section3-checkbox-custom p-2"
                   required
                 />
                 <label
                   for="section3-consent"
-                  class="text-sm text-gray-600 leading-relaxed"
+                  class="text-sm text-gray-600 leadin g-relaxed"
                 >
                   Согласен с
                   <a href="#" class="text-blue-600 hover:underline"
@@ -1360,6 +1987,189 @@
     </footer>
 
     <script>
+      function playTeachersVideo() {
+        const video = document.getElementById("teachersVideo");
+        const container = document.querySelector(".teachers-video-container");
+
+        video.play();
+        container.classList.add("teachers-playing");
+      }
+
+      // Generate thumbnail from first frame
+      function generateTeachersThumbnail(video) {
+        return new Promise((resolve) => {
+          video.addEventListener(
+            "loadeddata",
+            () => {
+              const canvas = document.createElement("canvas");
+              const ctx = canvas.getContext("2d");
+
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+
+              video.currentTime = 0.5; // Get frame at 0.5 seconds
+
+              video.addEventListener(
+                "seeked",
+                () => {
+                  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                  const thumbnail = canvas.toDataURL("image/jpeg", 0.8);
+                  resolve(thumbnail);
+                },
+                { once: true }
+              );
+            },
+            { once: true }
+          );
+        });
+      }
+
+      // Initialize video functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const video = document.getElementById("teachersVideo");
+        const container = document.querySelector(".teachers-video-container");
+        const playOverlay = document.querySelector(".teachers-play-overlay");
+
+        // Generate and set thumbnail
+        video.addEventListener("loadedmetadata", async () => {
+          try {
+            const thumbnail = await generateTeachersThumbnail(video);
+            video.poster = thumbnail;
+          } catch (e) {
+            console.log("Could not generate thumbnail for teachers video");
+          }
+        });
+
+        // Show/hide play overlay
+        video.addEventListener("play", () => {
+          container.classList.add("teachers-playing");
+        });
+
+        video.addEventListener("pause", () => {
+          container.classList.remove("teachers-playing");
+        });
+
+        video.addEventListener("ended", () => {
+          container.classList.remove("teachers-playing");
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px",
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.animationPlayState = "running";
+            }
+          });
+        }, observerOptions);
+
+        // Observe feature cards for staggered animations
+        document.querySelectorAll(".teachers-feature-card").forEach((card) => {
+          observer.observe(card);
+        });
+      });
+
+      function toggleTestimonialVideo(container) {
+        const video = container.querySelector(".testimonial-video");
+        const allContainers = document.querySelectorAll(
+          ".testimonial-video-container"
+        );
+
+        // Pause all other videos and remove playing class
+        allContainers.forEach((c) => {
+          const v = c.querySelector(".testimonial-video");
+          if (v !== video) {
+            v.pause();
+            c.classList.remove("testimonial-playing");
+          }
+        });
+
+        // Toggle current video
+        if (video.paused) {
+          video.play();
+          container.classList.add("testimonial-playing");
+        } else {
+          video.pause();
+          container.classList.remove("testimonial-playing");
+        }
+      }
+
+      // Generate thumbnail from first frame of video
+      function generateThumbnail(video) {
+        return new Promise((resolve) => {
+          video.addEventListener(
+            "loadeddata",
+            () => {
+              const canvas = document.createElement("canvas");
+              const ctx = canvas.getContext("2d");
+
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+
+              // Seek to first frame
+              video.currentTime = 0.1;
+
+              video.addEventListener(
+                "seeked",
+                () => {
+                  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                  const thumbnail = canvas.toDataURL("image/jpeg", 0.8);
+                  resolve(thumbnail);
+                },
+                { once: true }
+              );
+            },
+            { once: true }
+          );
+        });
+      }
+
+      // Auto-hover effect and thumbnail generation
+      document.addEventListener("DOMContentLoaded", function () {
+        const containers = document.querySelectorAll(
+          ".testimonial-video-container"
+        );
+
+        containers.forEach((container, index) => {
+          const video = container.querySelector(".testimonial-video");
+
+          // Generate thumbnail when video metadata loads
+          video.addEventListener("loadedmetadata", async () => {
+            try {
+              const thumbnail = await generateThumbnail(video);
+              video.poster = thumbnail;
+            } catch (e) {
+              console.log("Could not generate thumbnail for video", index + 1);
+            }
+          });
+
+          // Add hover event listeners
+          container.addEventListener("mouseenter", () => {
+            video.play().catch((e) => console.log("Autoplay prevented"));
+            container.classList.add("testimonial-playing");
+          });
+
+          container.addEventListener("mouseleave", () => {
+            video.pause();
+            video.currentTime = 0; // Reset to first frame
+            container.classList.remove("testimonial-playing");
+          });
+
+          // Hide play button when video is actually playing
+          video.addEventListener("play", () => {
+            container.classList.add("testimonial-playing");
+          });
+
+          video.addEventListener("pause", () => {
+            container.classList.remove("testimonial-playing");
+          });
+        });
+      });
+
       // Section 3 - Intersection Observer for animations
       const section3ObserverOptions = {
         threshold: 0.1,
@@ -1569,6 +2379,57 @@
         }
         updateCounter();
       }
+
+      const form = document.getElementById("section3-consultation-form");
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const phone = document.getElementById("section3-phone").value;
+        const name = document.getElementById("section3-parent-name").value;
+        const email = document.getElementById("section3-email").value;
+        const subject = document.getElementById("section3-subject").value;
+
+        const data = {
+          access_key: "37812b5e-054a-42ec-8756-8613036d2547", // Replace with your actual Web3Forms key
+          subject: "Новая заявка с формы консультации",
+          name: name,
+          email: email,
+          phone: phone,
+          subject_selected: subject,
+        };
+
+        try {
+          const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          if (response.ok) {
+            const btn = form.querySelector(".section3-submit-btn");
+            const original = btn.innerHTML;
+            btn.innerHTML = "✓ Отправлено!";
+            btn.disabled = true;
+            btn.style.background = "#22c55e";
+
+            setTimeout(() => {
+              btn.innerHTML = original;
+              btn.disabled = false;
+              btn.style.background = "";
+              form.reset();
+            }, 3000);
+          } else {
+            alert("Ошибка при отправке. Попробуйте позже.");
+          }
+        } catch (error) {
+          console.error("Ошибка отправки:", error);
+          alert("Ошибка сети или сервиса.");
+        }
+      });
 
       // CTA Click handler
       async function handleCTAClick(event) {
