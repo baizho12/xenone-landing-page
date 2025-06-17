@@ -1484,11 +1484,11 @@
 
                   <div class="testimonial-quote-bubble max-w-xs">
                     <p class="text-sm font-medium">
-                      "Наконец-то понял физику!"
+                      "Я не только поняла, но и полюбила химию!"
                     </p>
                   </div>
                   <p class="text-sm text-gray-600 mt-2 font-medium">
-                    Айдана, 9 класс
+                    Мадина, 11 класс
                   </p>
                 </div>
 
@@ -1528,10 +1528,12 @@
                   </div>
 
                   <div class="testimonial-quote-bubble max-w-xs">
-                    <p class="text-sm font-medium">"95 баллов на ЕГЭ! 🔥"</p>
+                    <p class="text-sm font-medium">
+                      "Занял 2 место на олимпиаде по физике! 🔥"
+                    </p>
                   </div>
                   <p class="text-sm text-gray-600 mt-2 font-medium">
-                    Артем, 11 класс
+                    Рустем, 8 класс
                   </p>
                 </div>
 
@@ -1572,11 +1574,11 @@
 
                   <div class="testimonial-quote-bubble max-w-xs">
                     <p class="text-sm font-medium">
-                      "Математика стала легкой ✨"
+                      "Очень благодарна вашим репетиторам! ✨"
                     </p>
                   </div>
                   <p class="text-sm text-gray-600 mt-2 font-medium">
-                    София, 8 класс
+                    Сабина, 11 класс
                   </p>
                 </div>
 
@@ -1616,10 +1618,10 @@
                   </div>
 
                   <div class="testimonial-quote-bubble max-w-xs">
-                    <p class="text-sm font-medium">"Поступил в МГУ! 🎓"</p>
+                    <p class="text-sm font-medium">"Сізге үлкен рақмет! 🎓"</p>
                   </div>
                   <p class="text-sm text-gray-600 mt-2 font-medium">
-                    Данияр, выпускник
+                    Сабина, 6 сынып
                   </p>
                 </div>
               </div>
@@ -2776,27 +2778,29 @@
           });
 
           // Intersection Observer for scroll animations
-        const observerOptions = {
+          const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+            rootMargin: "0px 0px -50px 0px",
+          };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-visible');
-                }
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("animate-visible");
+              }
             });
-        }, observerOptions);
+          }, observerOptions);
 
-        // Observe all elements with animation classes
-        document.addEventListener('DOMContentLoaded', () => {
-            const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right, .animate-fade-in, .animate-scale-up');
-            
-            animatedElements.forEach(el => {
-                observer.observe(el);
+          // Observe all elements with animation classes
+          document.addEventListener("DOMContentLoaded", () => {
+            const animatedElements = document.querySelectorAll(
+              ".animate-on-scroll, .animate-slide-left, .animate-slide-right, .animate-fade-in, .animate-scale-up"
+            );
+
+            animatedElements.forEach((el) => {
+              observer.observe(el);
             });
-        });
+          });
         </script>
       </body>
     </html>
